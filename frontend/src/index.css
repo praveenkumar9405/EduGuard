@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@theme {
+  --color-primary: #2E7D32;
+  --color-secondary: #F5F7FA;
+  --color-accent: #4A90E2;
+  --font-family-sans: 'Inter', 'Poppins', sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-secondary);
+    color: #1e293b;
+    font-family: var(--font-family-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}

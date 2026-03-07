@@ -1,0 +1,201 @@
+student_id,name,class,attendance_rate,last_exam_score,exam_score_trend,midday_meal_participation,distance_from_school_km,sibling_dropout_history,family_income_level
+STU0001,Sandeep Singh,8,69.9,48.5,Stable,Regular,5.5,Yes,Low
+STU0002,Lakshmi Pandey,12,88.0,84.5,Stable,Regular,2.5,No,Medium
+STU0003,Aditya Rao,11,87.3,93.7,Stable,Regular,0.9,No,Medium
+STU0004,Pooja Tiwari,10,61.9,40.7,Declining,Irregular,5.6,No,Below Poverty Line
+STU0005,Shruti Joshi,12,86.0,84.8,Stable,Regular,4.3,No,Medium
+STU0006,Arjun Gupta,11,72.3,54.3,Stable,Regular,6.2,Yes,Medium
+STU0007,Lakshmi Rao,11,99.8,84.2,Improving,Regular,4.3,No,High
+STU0008,Lakshmi Patel,10,86.0,92.4,Stable,Regular,3.4,No,Medium
+STU0009,Sandeep Bose,9,88.7,81.8,Stable,Regular,4.5,No,High
+STU0010,Lakshmi Reddy,12,96.3,90.8,Improving,Regular,4.1,No,Medium
+STU0011,Priya Chauhan,11,74.4,51.3,Improving,Irregular,6.1,Yes,Low
+STU0012,Karan Singh,10,91.8,93.6,Stable,Regular,2.8,No,Medium
+STU0013,Sandeep Nair,12,68.1,64.1,Improving,Regular,5.6,No,Low
+STU0014,Pooja Nair,9,98.2,93.4,Improving,Regular,4.2,No,High
+STU0015,Divya Reddy,9,83.9,49.1,Improving,Regular,7.8,No,Medium
+STU0016,Arjun Agarwal,10,92.8,68.6,Improving,Regular,2.0,No,Medium
+STU0017,Lakshmi Mishra,9,95.6,66.8,Improving,Regular,4.4,No,Medium
+STU0018,Lakshmi Gupta,11,87.0,93.1,Stable,Regular,4.0,No,Medium
+STU0019,Suresh Singh,8,72.1,55.3,Improving,Regular,6.0,Yes,Low
+STU0020,Karan Singh,9,93.0,69.2,Improving,Regular,2.6,No,High
+STU0021,Priya Bose,12,94.8,81.2,Improving,Regular,4.7,No,Medium
+STU0022,Kavya Mehta,11,98.0,92.1,Improving,Regular,0.5,No,High
+STU0023,Rahul Nair,11,79.6,64.6,Improving,Regular,2.9,No,Medium
+STU0024,Amit Chowdhury,8,66.1,59.6,Improving,Regular,2.3,No,Low
+STU0025,Priya Tiwari,8,69.7,48.0,Improving,Regular,5.5,Yes,Low
+STU0026,Amit Mishra,12,88.9,85.1,Stable,Regular,1.7,No,Medium
+STU0027,Sandeep Nair,11,96.3,67.2,Stable,Regular,0.8,No,Medium
+STU0028,Vikram Reddy,10,66.4,37.4,Declining,Irregular,8.1,No,Low
+STU0029,Shruti Agarwal,12,97.3,74.0,Improving,Regular,1.7,No,Medium
+STU0030,Kiran Chowdhury,9,94.1,86.5,Improving,Regular,2.8,No,High
+STU0031,Aarav Kumar,11,41.3,36.7,Declining,Irregular,9.5,No,Low
+STU0032,Rahul Chowdhury,11,67.2,68.6,Improving,Regular,5.3,No,Low
+STU0033,Aarav Nair,10,63.9,47.2,Declining,Irregular,6.5,Yes,Below Poverty Line
+STU0034,Pooja Chowdhury,11,62.5,48.5,Declining,Irregular,11.1,Yes,Low
+STU0035,Aditya Rao,10,73.2,61.7,Improving,Irregular,3.6,Yes,Low
+STU0036,Nisha Yadav,9,53.8,36.1,Declining,Irregular,6.6,No,Low
+STU0037,Karan Gupta,8,48.4,42.8,Declining,Irregular,9.8,No,Below Poverty Line
+STU0038,Aditya Singh,10,99.4,73.0,Improving,Regular,2.1,No,High
+STU0039,Ananya Tiwari,12,98.5,70.7,Improving,Regular,0.5,No,High
+STU0040,Divya Das,10,99.2,92.6,Stable,Regular,3.7,No,Medium
+STU0041,Sneha Mehta,10,89.4,68.8,Stable,Regular,3.5,No,High
+STU0042,Shruti Mishra,10,97.5,74.1,Improving,Regular,4.0,No,High
+STU0043,Karan Bose,11,88.2,79.2,Improving,Regular,1.8,No,Medium
+STU0044,Shruti Iyer,8,62.5,43.5,Fluctuating,Irregular,10.6,Yes,Low
+STU0045,Lakshmi Verma,12,42.2,38.3,Declining,Irregular,10.0,No,Low
+STU0046,Lakshmi Reddy,8,65.8,47.7,Declining,Irregular,6.5,No,Below Poverty Line
+STU0047,Aarav Chowdhury,9,43.6,32.7,Declining,Irregular,9.7,No,Below Poverty Line
+STU0048,Rahul Tiwari,12,98.6,78.4,Improving,Regular,2.5,No,High
+STU0049,Sandeep Gupta,12,88.6,78.2,Stable,Regular,1.7,No,Medium
+STU0050,Divya Kumar,9,90.7,69.6,Improving,Regular,2.4,No,Medium
+STU0051,Rahul Mehta,8,91.3,92.1,Improving,Regular,2.6,No,High
+STU0052,Sneha Chauhan,11,79.7,65.0,Fluctuating,Irregular,3.3,No,Medium
+STU0053,Karan Chauhan,9,67.6,49.6,Declining,Irregular,11.3,No,Low
+STU0054,Aditya Kumar,11,91.9,66.5,Stable,Regular,1.5,No,High
+STU0055,Arjun Gupta,11,86.2,65.6,Improving,Regular,1.5,No,High
+STU0056,Sandeep Patel,8,46.0,30.4,Declining,Irregular,6.7,No,Low
+STU0057,Amit Das,11,80.3,49.2,Improving,Irregular,6.7,No,Low
+STU0058,Aditya Nair,12,84.2,54.9,Improving,Regular,2.5,No,Low
+STU0059,Sneha Tiwari,8,76.3,46.0,Fluctuating,Irregular,6.0,Yes,Medium
+STU0060,Ananya Verma,8,90.4,91.7,Stable,Regular,2.5,No,Medium
+STU0061,Sandeep Gupta,12,56.1,39.7,Declining,Irregular,10.8,No,Below Poverty Line
+STU0062,Lakshmi Kumar,10,47.3,39.3,Declining,Irregular,7.4,No,Below Poverty Line
+STU0063,Kavya Verma,9,88.9,73.4,Stable,Regular,2.8,No,Medium
+STU0064,Lakshmi Mehta,11,69.8,56.9,Improving,Regular,4.7,Yes,Medium
+STU0065,Arjun Yadav,10,72.4,58.8,Declining,Irregular,8.0,No,Medium
+STU0066,Rahul Gupta,10,86.8,70.8,Improving,Regular,1.4,No,Medium
+STU0067,Vikram Mishra,12,84.6,65.8,Declining,Regular,4.2,No,Low
+STU0068,Ravi Gupta,8,56.6,43.9,Declining,Irregular,9.5,No,Low
+STU0069,Aditya Mishra,10,91.6,70.5,Improving,Regular,4.7,No,High
+STU0070,Priya Chauhan,11,94.4,66.6,Improving,Regular,0.9,No,High
+STU0071,Divya Mehta,12,77.4,64.4,Declining,Irregular,7.5,No,Medium
+STU0072,Shruti Patel,12,43.0,45.3,Declining,Irregular,6.9,Yes,Low
+STU0073,Kavya Chowdhury,8,91.1,85.7,Stable,Regular,0.6,No,High
+STU0074,Sneha Bose,8,83.5,64.7,Improving,Regular,4.6,No,Low
+STU0075,Vikram Reddy,8,96.9,82.9,Stable,Regular,1.1,No,High
+STU0076,Manoj Chauhan,10,74.9,47.0,Fluctuating,Irregular,6.4,No,Medium
+STU0077,Lakshmi Mishra,12,70.0,43.4,Declining,Irregular,9.0,Yes,Below Poverty Line
+STU0078,Sandeep Bose,10,93.8,84.0,Stable,Regular,2.6,No,Medium
+STU0079,Karan Singh,9,95.4,73.6,Stable,Regular,2.5,No,Medium
+STU0080,Karan Singh,11,64.7,30.0,Declining,Irregular,7.9,Yes,Below Poverty Line
+STU0081,Shruti Verma,11,69.1,58.7,Fluctuating,Regular,7.3,No,Medium
+STU0082,Sandeep Tiwari,9,71.2,45.3,Declining,Irregular,3.3,Yes,Low
+STU0083,Sandeep Reddy,11,48.8,44.1,Declining,Irregular,10.8,No,Below Poverty Line
+STU0084,Divya Reddy,11,94.0,87.4,Improving,Regular,1.7,No,Medium
+STU0085,Ananya Iyer,12,85.0,86.8,Stable,Regular,2.5,No,Medium
+STU0086,Karan Chowdhury,12,99.0,91.1,Improving,Regular,1.6,No,High
+STU0087,Aarav Iyer,11,81.2,54.7,Improving,Regular,5.0,Yes,Low
+STU0088,Amit Iyer,8,53.2,40.5,Declining,Irregular,5.1,Yes,Below Poverty Line
+STU0089,Sandeep Reddy,8,99.5,75.2,Stable,Regular,4.3,No,Medium
+STU0090,Divya Chauhan,10,82.7,57.2,Improving,Irregular,5.7,No,Low
+STU0091,Kiran Kumar,11,62.8,44.1,Declining,Irregular,8.1,No,Low
+STU0092,Aditya Patel,10,70.9,54.4,Stable,Regular,5.2,No,Low
+STU0093,Priya Tiwari,11,69.8,67.8,Stable,Irregular,4.8,No,Low
+STU0094,Aditya Bose,10,68.2,56.0,Declining,Irregular,5.8,No,Medium
+STU0095,Sneha Das,11,43.2,37.6,Declining,Irregular,9.0,No,Below Poverty Line
+STU0096,Swati Chauhan,10,98.0,88.3,Improving,Regular,4.2,No,High
+STU0097,Lakshmi Tiwari,10,87.9,72.5,Improving,Regular,4.6,No,Medium
+STU0098,Sneha Bose,8,79.6,47.3,Declining,Regular,6.5,No,Medium
+STU0099,Divya Joshi,12,70.5,49.1,Declining,Regular,6.5,No,Medium
+STU0100,Priya Reddy,9,61.7,49.6,Fluctuating,Irregular,5.6,No,Below Poverty Line
+STU0101,Divya Singh,11,96.2,72.9,Stable,Regular,1.0,No,High
+STU0102,Aditya Tiwari,12,94.2,84.4,Stable,Regular,3.4,No,High
+STU0103,Aarav Patel,10,43.5,34.7,Declining,Irregular,7.7,No,Low
+STU0104,Kiran Chowdhury,11,79.5,67.1,Improving,Irregular,7.0,No,Low
+STU0105,Vikram Patel,10,91.7,72.1,Stable,Regular,4.9,No,Medium
+STU0106,Sandeep Joshi,8,87.8,68.7,Stable,Regular,3.5,No,Medium
+STU0107,Shruti Sharma,8,69.9,48.1,Improving,Regular,2.4,No,Low
+STU0108,Lakshmi Iyer,9,76.9,51.9,Stable,Regular,5.2,No,Low
+STU0109,Aditya Reddy,8,96.8,82.7,Improving,Regular,1.7,No,Medium
+STU0110,Ananya Pandey,8,74.5,64.5,Improving,Regular,4.7,No,Low
+STU0111,Swati Pandey,10,99.5,66.8,Stable,Regular,2.4,No,High
+STU0112,Manoj Bose,8,49.7,33.0,Declining,Irregular,6.9,No,Low
+STU0113,Manoj Iyer,11,55.9,39.1,Declining,Irregular,5.7,No,Below Poverty Line
+STU0114,Sandeep Agarwal,12,69.3,56.3,Stable,Irregular,4.0,No,Medium
+STU0115,Meena Iyer,11,88.8,93.6,Stable,Regular,0.9,No,Medium
+STU0116,Ananya Singh,10,56.7,41.7,Declining,Irregular,9.7,No,Below Poverty Line
+STU0117,Swati Mehta,8,58.0,37.0,Declining,Irregular,6.1,No,Low
+STU0118,Meena Joshi,12,96.4,82.2,Stable,Regular,3.2,No,Medium
+STU0119,Manoj Gupta,8,95.5,74.3,Stable,Regular,0.5,No,High
+STU0120,Amit Chauhan,8,94.5,65.9,Improving,Regular,2.4,No,High
+STU0121,Pooja Nair,10,76.4,47.1,Stable,Regular,2.9,No,Low
+STU0122,Vikram Bose,11,91.6,73.2,Improving,Regular,2.4,No,High
+STU0123,Swati Mishra,11,71.2,50.5,Improving,Regular,2.0,No,Low
+STU0124,Vikram Nair,10,92.5,77.9,Improving,Regular,2.9,No,High
+STU0125,Divya Joshi,8,96.1,78.1,Stable,Regular,4.4,No,Medium
+STU0126,Amit Chauhan,11,91.1,94.0,Improving,Regular,4.2,No,High
+STU0127,Priya Mehta,8,93.8,80.7,Stable,Regular,3.9,No,High
+STU0128,Kavya Kumar,12,75.6,49.8,Declining,Regular,6.4,No,Medium
+STU0129,Vikram Das,9,80.2,61.4,Stable,Irregular,4.8,No,Medium
+STU0130,Amit Agarwal,12,99.6,74.5,Stable,Regular,2.6,No,Medium
+STU0131,Vikram Mishra,8,86.1,78.9,Improving,Regular,2.2,No,Medium
+STU0132,Sandeep Kumar,12,72.7,59.5,Improving,Regular,4.7,No,Low
+STU0133,Nisha Pandey,9,53.5,46.2,Declining,Irregular,11.9,Yes,Below Poverty Line
+STU0134,Kavya Patel,9,84.8,58.1,Improving,Irregular,4.2,No,Low
+STU0135,Karan Tiwari,8,77.9,46.6,Stable,Regular,3.7,No,Medium
+STU0136,Amit Reddy,10,94.8,84.9,Improving,Regular,1.9,No,Medium
+STU0137,Karan Reddy,12,95.1,80.3,Improving,Regular,1.9,No,High
+STU0138,Karan Verma,9,87.1,67.3,Improving,Regular,3.5,No,Medium
+STU0139,Shruti Reddy,12,87.4,89.9,Improving,Regular,0.7,No,High
+STU0140,Kiran Yadav,11,80.0,64.6,Stable,Regular,3.9,No,Low
+STU0141,Amit Bose,11,80.6,57.6,Declining,Regular,6.9,No,Low
+STU0142,Aarav Agarwal,11,56.6,32.1,Declining,Irregular,7.0,Yes,Low
+STU0143,Rohit Reddy,11,98.7,89.5,Stable,Regular,2.4,No,Medium
+STU0144,Pooja Yadav,11,51.2,30.6,Declining,Irregular,10.9,No,Low
+STU0145,Ravi Reddy,8,97.4,85.9,Fluctuating,Regular,2.5,No,High
+STU0146,Priya Sharma,10,87.2,93.2,Stable,Regular,4.0,No,Medium
+STU0147,Meena Patel,9,96.9,78.7,Fluctuating,Regular,3.2,No,High
+STU0148,Rohit Mishra,9,70.8,45.0,Declining,Regular,5.4,No,Low
+STU0149,Pooja Kumar,12,80.7,57.7,Stable,Irregular,7.2,Yes,Medium
+STU0150,Vikram Sharma,10,71.9,63.3,Fluctuating,Regular,6.6,No,Low
+STU0151,Divya Iyer,9,60.5,49.6,Declining,Irregular,9.4,Yes,Below Poverty Line
+STU0152,Rahul Patel,10,96.9,91.6,Stable,Regular,2.8,No,High
+STU0153,Divya Verma,10,94.7,73.6,Improving,Regular,1.7,No,High
+STU0154,Ananya Chauhan,11,51.6,49.5,Declining,Irregular,9.8,No,Below Poverty Line
+STU0155,Rohit Gupta,8,66.6,60.1,Stable,Irregular,3.9,Yes,Medium
+STU0156,Sneha Bose,12,68.3,56.1,Declining,Irregular,6.4,No,Low
+STU0157,Aarav Kumar,11,97.0,85.4,Improving,Regular,4.3,No,Medium
+STU0158,Rahul Patel,9,96.7,76.0,Stable,Regular,3.2,No,Medium
+STU0159,Pooja Joshi,11,76.5,58.2,Fluctuating,Regular,5.9,No,Medium
+STU0160,Kavya Verma,12,93.4,72.9,Stable,Regular,1.5,No,High
+STU0161,Manoj Verma,9,97.8,78.6,Stable,Regular,4.1,No,Medium
+STU0162,Karan Joshi,8,70.8,52.5,Stable,Regular,6.8,No,Low
+STU0163,Suresh Reddy,9,65.5,58.9,Declining,Regular,6.8,No,Medium
+STU0164,Priya Kumar,10,95.8,79.4,Stable,Regular,4.2,No,High
+STU0165,Karan Agarwal,8,95.2,75.3,Improving,Regular,2.4,No,Medium
+STU0166,Aarav Singh,12,87.5,74.7,Improving,Regular,4.8,No,High
+STU0167,Sneha Kumar,10,99.3,73.2,Stable,Regular,2.8,No,Medium
+STU0168,Amit Reddy,9,79.4,60.1,Fluctuating,Regular,7.0,Yes,Low
+STU0169,Sandeep Mishra,10,80.3,55.4,Improving,Irregular,5.0,No,Low
+STU0170,Sneha Verma,9,60.5,35.9,Declining,Irregular,9.8,Yes,Low
+STU0171,Nisha Bose,9,87.2,90.8,Stable,Regular,4.9,No,High
+STU0172,Pooja Pandey,12,88.6,68.7,Stable,Regular,1.1,No,Medium
+STU0173,Arjun Tiwari,11,98.0,69.8,Stable,Regular,1.4,No,High
+STU0174,Rohit Bose,11,54.9,31.8,Declining,Irregular,8.5,Yes,Below Poverty Line
+STU0175,Pooja Patel,8,94.0,90.3,Stable,Regular,2.9,No,High
+STU0176,Ananya Reddy,10,80.3,54.1,Declining,Irregular,5.4,No,Low
+STU0177,Priya Chauhan,12,93.2,89.8,Improving,Regular,4.9,No,Medium
+STU0178,Karan Chowdhury,10,69.0,57.7,Improving,Irregular,2.3,No,Low
+STU0179,Rohit Bose,9,75.3,53.2,Improving,Irregular,3.0,No,Medium
+STU0180,Rohit Pandey,12,93.4,79.2,Improving,Regular,2.0,No,High
+STU0181,Ananya Mishra,10,79.5,62.2,Stable,Regular,3.6,No,Medium
+STU0182,Amit Verma,9,79.4,64.4,Declining,Regular,6.9,No,Low
+STU0183,Manoj Singh,9,89.7,69.5,Improving,Regular,2.8,No,High
+STU0184,Nisha Patel,9,76.2,70.0,Declining,Irregular,3.9,No,Medium
+STU0185,Karan Chowdhury,10,82.4,62.0,Improving,Regular,5.7,No,Medium
+STU0186,Sneha Yadav,10,79.1,62.3,Declining,Irregular,4.9,No,Medium
+STU0187,Amit Chowdhury,11,51.8,36.9,Declining,Irregular,7.0,No,Low
+STU0188,Priya Joshi,11,79.9,50.3,Improving,Regular,7.6,No,Medium
+STU0189,Kiran Mishra,9,95.0,80.9,Improving,Regular,1.0,No,Medium
+STU0190,Nisha Singh,9,93.3,92.9,Stable,Regular,2.6,No,High
+STU0191,Sneha Iyer,10,83.2,47.2,Improving,Regular,5.2,Yes,Low
+STU0192,Kavya Patel,11,68.7,63.7,Declining,Regular,2.1,No,Low
+STU0193,Karan Nair,11,56.3,39.9,Declining,Irregular,11.0,No,Low
+STU0194,Meena Iyer,9,78.0,63.0,Stable,Regular,6.7,No,Medium
+STU0195,Sandeep Chauhan,11,66.7,61.7,Stable,Regular,4.9,No,Low
+STU0196,Lakshmi Bose,10,49.1,44.5,Declining,Irregular,6.8,No,Low
+STU0197,Aarav Singh,11,91.1,80.1,Stable,Regular,3.4,No,Medium
+STU0198,Pooja Tiwari,9,87.0,69.6,Stable,Regular,3.7,No,High
+STU0199,Divya Das,9,76.9,64.7,Improving,Regular,5.2,No,Medium
+STU0200,Meena Patel,12,46.1,40.7,Declining,Irregular,7.3,No,Low
