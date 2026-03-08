@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { predictRiskAPI, loadDemoDataAPI } from '../services/api';
 import Card from '../components/Card';
 import RiskBadge from '../components/RiskBadge';
@@ -120,6 +121,25 @@ const Dashboard = () => {
         ? Math.round(students.reduce((acc, s) => acc + s.risk_score, 0) / students.length)
         : 0;
 
+    // Analytics Data Prep
+    const riskData = [
+        { name: 'Low Risk', value: students.length - highRiskCount - students.filter(s => s.risk_level === 'Medium').length, color: '#22c55e' },
+        { name: 'Medium Risk', value: students.filter(s => s.risk_level === 'Medium').length, color: '#f97316' },
+        { name: 'High Risk', value: highRiskCount, color: '#ef4444' }
+    ].filter(d => d.value > 0);
+
+    const factorCounts = {};
+    students.forEach(s => {
+        if (s.top_factors && s.top_factors[0]) {
+            const f = s.top_factors[0].factor;
+            factorCounts[f] = (factorCounts[f] || 0) + 1;
+        }
+    });
+    const factorData = Object.entries(factorCounts)
+        .map(([name, count]) => ({ name, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 4);
+
     const handleBulkNotify = () => {
         const highRisk = students.filter(s => s.risk_level === 'High');
         if (!highRisk.length) return;
@@ -131,9 +151,11 @@ const Dashboard = () => {
     if (loading) {
         return (
             <div className="max-w-6xl mx-auto px-6 h-64 flex flex-col items-center justify-center">
-                <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }} className="mb-4">
-                    <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full" />
-                </motion.div>
+                <div className="flex items-center gap-2 mb-4">
+                    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-3 h-3 rounded-full bg-primary" />
+                    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className="w-3 h-3 rounded-full bg-primary" />
+                    <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-3 h-3 rounded-full bg-primary" />
+                </div>
                 <p className="text-slate-500 font-medium">Loading AI Predictions...</p>
             </div>
         );
@@ -165,7 +187,9 @@ const Dashboard = () => {
             {user && (
                 <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="mb-6 flex items-center justify-between">
                     <div>
-                        <h1 className="text-2xl font-bold text-slate-800">Welcome back, {user.name} 👋</h1>
+                        <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                            Welcome back, {user.name} <motion.span animate={{ y: [0, -5, 0] }} transition={{ duration: 1.5, repeat: Infinity }} className="inline-block">👋</motion.span>
+                        </h1>
                         <p className="text-slate-500 text-sm mt-0.5">{user.school}</p>
                     </div>
                     {highRiskCount > 0 && (
@@ -200,6 +224,53 @@ const Dashboard = () => {
                         </Card>
                     </motion.div>
                 ))}
+            </div>
+
+            {/* Analytics row */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-8">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
+                    <Card className="h-72 flex flex-col">
+                        <h3 className="text-lg font-semibold text-slate-800 mb-4 tracking-tight">Risk Category Distribution</h3>
+                        <div className="flex-1 w-full relative">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                    <Pie
+                                        data={riskData}
+                                        cx="50%" cy="50%"
+                                        innerRadius={60} outerRadius={80}
+                                        paddingAngle={5} dataKey="value"
+                                    >
+                                        {riskData.map((entry, index) => (
+                                            <Cell key={`cell-${index}`} fill={entry.color} />
+                                        ))}
+                                    </Pie>
+                                    <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                </PieChart>
+                            </ResponsiveContainer>
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none flex-col">
+                                <span className="text-3xl font-bold text-slate-800">{students.length}</span>
+                                <span className="text-xs text-slate-500 font-medium">Students</span>
+                            </div>
+                        </div>
+                    </Card>
+                </motion.div>
+
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }}>
+                    <Card className="h-72 flex flex-col">
+                        <h3 className="text-lg font-semibold text-slate-800 mb-4 tracking-tight">Common Causes of Dropout Risk</h3>
+                        <div className="flex-1 w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={factorData} layout="vertical" margin={{ top: 0, right: 30, left: 40, bottom: 0 }}>
+                                    <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} stroke="#E2E8F0" />
+                                    <XAxis type="number" hide />
+                                    <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: '#475569', fontSize: 12, fontWeight: 500 }} width={120} />
+                                    <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                    <Bar dataKey="count" fill="#4A90E2" radius={[0, 4, 4, 0]} barSize={20} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </Card>
+                </motion.div>
             </div>
 
             <div className="flex flex-wrap justify-between items-end gap-4 mb-5">

@@ -59,22 +59,36 @@ function AppInner() {
     <div className="min-h-screen bg-secondary flex flex-col font-sans">
       {/* Top Navigation — shown only when logged in (not on public pages) */}
       {user && !isPublicPage && (
-        <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-sm transition-all duration-300">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-white font-bold text-lg">E</span>
+        <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3 flex flex-col md:flex-row md:items-center justify-between sticky top-0 z-50 shadow-sm transition-all duration-300 gap-3 md:gap-0">
+          <div className="flex items-center justify-between w-full md:w-auto">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                <span className="text-white font-bold text-lg">E</span>
+              </div>
+              <span className="text-xl font-semibold text-slate-800 tracking-tight">
+                Edu<span className="text-primary">Guard</span>
+              </span>
             </div>
-            <span className="text-xl font-semibold text-slate-800 tracking-tight">
-              Edu<span className="text-primary">Guard</span>
-            </span>
+
+            {/* Mobile User pill + logout */}
+            <div className="flex items-center gap-2 md:hidden">
+              <div className="flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-slate-200/80 rounded-full px-2 py-1 shadow-sm">
+                <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
+                  {user.name.charAt(0)}
+                </div>
+              </div>
+              <button onClick={handleLogout} className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all">
+                <LogOut size={16} />
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 scrollbar-hide w-full md:w-auto px-1 md:px-0">
             {navItems.map(({ label, path, icon: Icon }) => (
               <button
                 key={path}
                 onClick={() => navigate(path)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-300
                   ${isActive(path)
                     ? 'bg-primary/10 text-primary shadow-sm scale-100'
                     : 'text-slate-500 hover:text-primary hover:bg-slate-50/80 hover:scale-[1.02]'
@@ -86,14 +100,14 @@ function AppInner() {
             ))}
           </div>
 
-          {/* User pill + logout */}
-          <div className="flex items-center gap-3">
+          {/* Desktop User pill + logout */}
+          <div className="hidden md:flex items-center gap-3">
             <div className="flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-slate-200/80 rounded-full px-3 py-1.5 shadow-sm hover:shadow-md transition-shadow cursor-default">
               <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
                 {user.name.charAt(0)}
               </div>
-              <span className="text-slate-700 text-sm font-medium hidden sm:block">{user.name}</span>
-              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full hidden sm:block ${ROLE_COLORS[user.role]}`}>
+              <span className="text-slate-700 text-sm font-medium">{user.name}</span>
+              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${ROLE_COLORS[user.role]}`}>
                 {ROLE_LABELS[user.role]}
               </span>
             </div>

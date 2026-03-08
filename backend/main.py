@@ -26,11 +26,11 @@ model = None
 feature_names = []
 
 INTERVENTIONS = [
-    {"name": "Home Visit", "trigger": "attendance", "description": "Visit the student's home to discuss attendance."},
-    {"name": "Counselling Session", "trigger": "general", "description": "1-on-1 counseling to address personal or academic stress."},
-    {"name": "Peer Buddy Assignment", "trigger": "exams", "description": "Pair with a high-performing student for academic support."},
-    {"name": "Scholarship Assistance", "trigger": "income", "description": "Help applying for financial aid."},
-    {"name": "Transportation Support", "trigger": "distance", "description": "Provide a bicycle or bus pass."}
+    {"name": "Home Visit", "trigger": "attendance", "description": "Visit the student's home to discuss attendance.", "explanation": "A direct home visit helps understand hidden family constraints preventing the student from attending school regularly, showing the family that the school cares."},
+    {"name": "Counselling Session", "trigger": "general", "description": "1-on-1 counseling to address personal or academic stress.", "explanation": "Counseling provides a safe space for the student to express anxieties or academic pressure, which is crucial for emotional stability and preventing disengagement."},
+    {"name": "Peer Buddy Assignment", "trigger": "exams", "description": "Pair with a high-performing student for academic support.", "explanation": "Peer learning is highly effective for improving exam scores as students often feel more comfortable asking questions and grasping concepts from their peers."},
+    {"name": "Scholarship Assistance", "trigger": "income", "description": "Help applying for financial aid.", "explanation": "Financial constraints are a primary driver of dropout. Securing a scholarship directly removes the economic pressure, allowing the student to focus entirely on education."},
+    {"name": "Transportation Support", "trigger": "distance", "description": "Provide a bicycle or bus pass.", "explanation": "Long travel distances cause severe fatigue and frequent absenteeism. Providing transport support immediately resolves the physical barrier to attending school."}
 ]
 
 SCHEMES = [
@@ -119,21 +119,21 @@ def predict_risk():
         # Calculate local top factors heuristically matching the importance & value
         factors = []
         if row['attendance_rate'] < 75:
-            factors.append({"factor": "Low Attendance", "weight": round(importances[features.index('attendance_rate')]*100, 1)})
+            factors.append({"factor": "Low Attendance", "weight": round(importances[features.index('attendance_rate')]*100, 1), "reason": f"Attendance is significantly low ({row['attendance_rate']}%), missing critical foundational instruction."})
         if row['last_exam_score'] < 50:
-            factors.append({"factor": "Low Exam Scores", "weight": round(importances[features.index('last_exam_score')]*100, 1)})
+            factors.append({"factor": "Low Exam Scores", "weight": round(importances[features.index('last_exam_score')]*100, 1), "reason": f"Recent score of {row['last_exam_score']}% indicates difficulty keeping up with the curriculum."})
         if row['distance_from_school_km'] > 5:
-            factors.append({"factor": "Long Travel Distance", "weight": round(importances[features.index('distance_from_school_km')]*100, 1)})
+            factors.append({"factor": "Long Travel Distance", "weight": round(importances[features.index('distance_from_school_km')]*100, 1), "reason": f"Traveling {row['distance_from_school_km']} km impacts daily energy levels and consistent attendance."})
         if row['family_income_level'] in ["Low", "Below Poverty Line"]:
-            factors.append({"factor": "Financial Constraints", "weight": round(importances[features.index('family_income_level')]*100, 1)})
+            factors.append({"factor": "Financial Constraints", "weight": round(importances[features.index('family_income_level')]*100, 1), "reason": f"Family falls under {row['family_income_level']} income category, adding risk of entering early child labor."})
         if row['sibling_dropout_history'] == "Yes":
-            factors.append({"factor": "Sibling Dropout", "weight": round(importances[features.index('sibling_dropout_history')]*100, 1)})
+            factors.append({"factor": "Sibling Dropout", "weight": round(importances[features.index('sibling_dropout_history')]*100, 1), "reason": "A history of siblings dropping out strongly normalizes leaving school early within the household."})
             
         # fallback based on ranking importances if none triggered
         if not factors:
              top_idx = np.argsort(importances)[::-1][:3]
              for i in top_idx:
-                 factors.append({"factor": features[i].replace('_', ' ').title(), "weight": round(importances[i]*100, 1)})
+                 factors.append({"factor": features[i].replace('_', ' ').title(), "weight": round(importances[i]*100, 1), "reason": "Identified by AI as a primary statistical contributor to risk tier."})
                  
         # sort by weight
         factors = sorted(factors, key=lambda x: x['weight'], reverse=True)[:3]
@@ -402,20 +402,20 @@ def load_demo_data():
 
         factors = []
         if row['attendance_rate'] < 75:
-            factors.append({"factor": "Low Attendance", "weight": round(importances[features.index('attendance_rate')]*100, 1)})
+            factors.append({"factor": "Low Attendance", "weight": round(importances[features.index('attendance_rate')]*100, 1), "reason": f"Attendance is significantly low ({row['attendance_rate']}%), missing critical foundational instruction."})
         if row['last_exam_score'] < 50:
-            factors.append({"factor": "Low Exam Scores", "weight": round(importances[features.index('last_exam_score')]*100, 1)})
+            factors.append({"factor": "Low Exam Scores", "weight": round(importances[features.index('last_exam_score')]*100, 1), "reason": f"Recent score of {row['last_exam_score']}% indicates difficulty keeping up with the curriculum."})
         if row['distance_from_school_km'] > 5:
-            factors.append({"factor": "Long Travel Distance", "weight": round(importances[features.index('distance_from_school_km')]*100, 1)})
+            factors.append({"factor": "Long Travel Distance", "weight": round(importances[features.index('distance_from_school_km')]*100, 1), "reason": f"Traveling {row['distance_from_school_km']} km impacts daily energy levels and consistent attendance."})
         if row['family_income_level'] in ["Low", "Below Poverty Line"]:
-            factors.append({"factor": "Financial Constraints", "weight": round(importances[features.index('family_income_level')]*100, 1)})
+            factors.append({"factor": "Financial Constraints", "weight": round(importances[features.index('family_income_level')]*100, 1), "reason": f"Family falls under {row['family_income_level']} income category, adding risk of entering early child labor."})
         if row['sibling_dropout_history'] == "Yes":
-            factors.append({"factor": "Sibling Dropout", "weight": round(importances[features.index('sibling_dropout_history')]*100, 1)})
+            factors.append({"factor": "Sibling Dropout", "weight": round(importances[features.index('sibling_dropout_history')]*100, 1), "reason": "A history of siblings dropping out strongly normalizes leaving school early within the household."})
 
         if not factors:
             top_idx = np.argsort(importances)[::-1][:3]
             for i in top_idx:
-                factors.append({"factor": features[i].replace('_', ' ').title(), "weight": round(importances[i]*100, 1)})
+                factors.append({"factor": features[i].replace('_', ' ').title(), "weight": round(importances[i]*100, 1), "reason": "Identified by AI as a primary statistical contributor to risk tier."})
 
         factors = sorted(factors, key=lambda x: x['weight'], reverse=True)[:3]
         risk_results[sid] = {
@@ -437,11 +437,25 @@ def log_intervention(intervention: dict):
 
 @app.get("/intervention_outcome/{id}")
 def intervention_outcome(id: str):
-    # Return mock comparison data
+    # Return mock comparison data for multiple metrics
     return {
         "student_id": id,
-        "metric": "Attendance",
-        "before": round(random.uniform(40, 60), 1),
-        "after": round(random.uniform(70, 95), 1),
-        "days_tracked": 30
+        "days_tracked": 30,
+        "metrics": [
+            {
+                "name": "Attendance %",
+                "before": round(random.uniform(40, 60), 1),
+                "after": round(random.uniform(70, 95), 1)
+            },
+            {
+                "name": "Class Engagement / 10",
+                "before": round(random.uniform(3, 5), 1),
+                "after": round(random.uniform(6, 9), 1)
+            },
+            {
+                "name": "Risk Score %",
+                "before": round(random.uniform(65, 90), 1),
+                "after": round(random.uniform(30, 50), 1)
+            }
+        ]
     }

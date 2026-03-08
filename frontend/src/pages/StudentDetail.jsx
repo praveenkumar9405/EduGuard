@@ -95,19 +95,25 @@ const StudentDetail = () => {
                             <div className="space-y-4">
                                 <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Top Risk Factors</h4>
                                 {data.risk_profile.top_factors.map((factor, idx) => (
-                                    <div key={idx}>
-                                        <div className="flex justify-between text-sm mb-1">
-                                            <span className="font-medium text-slate-700">{factor.factor}</span>
-                                            <span className="text-slate-500">{factor.weight}%</span>
+                                    <div key={idx} className="bg-slate-50 border border-slate-100 p-3 rounded-xl mb-3">
+                                        <div className="flex justify-between text-sm mb-1.5 align-middle">
+                                            <span className="font-semibold text-slate-700 flex items-center gap-1.5">
+                                                <span className={`w-2 h-2 rounded-full ${idx === 0 ? 'bg-red-500' : 'bg-orange-400'}`} />
+                                                {factor.factor}
+                                            </span>
+                                            <span className="text-slate-500 font-bold bg-white px-2 py-0.5 rounded-md shadow-sm border border-slate-200">{factor.weight}%</span>
                                         </div>
-                                        <div className="w-full bg-slate-100 rounded-full h-2">
+                                        <div className="w-full bg-slate-200/60 rounded-full h-1.5 mb-2.5 overflow-hidden">
                                             <motion.div
                                                 initial={{ width: 0 }}
                                                 animate={{ width: `${factor.weight}%` }}
                                                 transition={{ duration: 1, delay: 0.5 + idx * 0.1 }}
-                                                className={`h-2 rounded-full ${idx === 0 ? 'bg-red-500' : 'bg-orange-400'}`}
+                                                className={`h-full rounded-full ${idx === 0 ? 'bg-red-500' : 'bg-orange-400'}`}
                                             />
                                         </div>
+                                        <p className="text-xs text-slate-500 leading-relaxed italic border-l-2 pl-2 border-slate-300">
+                                            "{factor.reason}"
+                                        </p>
                                     </div>
                                 ))}
                             </div>
@@ -165,10 +171,16 @@ const StudentDetail = () => {
                             </h3>
                             <div className="space-y-3">
                                 {interventions.map((int, i) => (
-                                    <div key={i} className="p-4 border border-green-100 bg-green-50/50 rounded-xl relative overflow-hidden">
+                                    <div key={i} className="p-4 border border-green-100 bg-green-50/50 hover:bg-green-50 transition-colors rounded-xl relative overflow-hidden group">
                                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-500" />
-                                        <h4 className="font-semibold text-green-800">{int.name}</h4>
-                                        <p className="text-sm text-green-700/80 mt-1">{int.description}</p>
+                                        <h4 className="font-bold text-green-800 flex items-center gap-2">
+                                            {int.name}
+                                        </h4>
+                                        <p className="text-xs font-medium text-green-700/70 mt-1">{int.description}</p>
+                                        <div className="mt-3 pt-3 border-t border-green-200/60">
+                                            <h5 className="text-[10px] uppercase font-bold text-green-600/60 tracking-wider mb-1">Why this helps</h5>
+                                            <p className="text-sm text-green-800/90 leading-snug">{int.explanation}</p>
+                                        </div>
                                     </div>
                                 ))}
                             </div>
@@ -249,46 +261,48 @@ const StudentDetail = () => {
                     </Card>
 
                     {/* Volunteer Alert (shown if student is high risk or absent) */}
-                    {(data.risk_profile.risk_level === 'High' || DEMO_ABSENT) && (
-                        <Card>
-                            <div className="flex items-center gap-2 mb-4">
-                                <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
-                                    <Megaphone className="text-orange-500" /> Volunteer Alert
-                                </h3>
-                                <span className="text-xs bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full">ABSENT TODAY</span>
-                            </div>
+                    {
+                        (data.risk_profile.risk_level === 'High' || DEMO_ABSENT) && (
+                            <Card>
+                                <div className="flex items-center gap-2 mb-4">
+                                    <h3 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
+                                        <Megaphone className="text-orange-500" /> Volunteer Alert
+                                    </h3>
+                                    <span className="text-xs bg-red-100 text-red-700 font-bold px-2 py-0.5 rounded-full">ABSENT TODAY</span>
+                                </div>
 
-                            <p className="text-xs text-slate-400 mb-2 font-medium">Alert message for community volunteer — edit if needed:</p>
-                            <div className="relative mb-4">
-                                <textarea
-                                    value={volunteerMessage}
-                                    onChange={e => setVolunteerMessage(e.target.value)}
-                                    className="w-full h-24 p-4 bg-orange-50 border border-orange-200 rounded-xl text-slate-700 resize-none focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-400 text-sm"
-                                />
-                                <button
-                                    onClick={() => handleCopy(volunteerMessage, setVolunteerCopied)}
-                                    className="absolute bottom-3 right-3 text-slate-500 hover:text-slate-800 bg-white shadow-sm border border-slate-200 p-2 rounded-lg transition-colors flex items-center gap-1.5 text-xs font-medium"
+                                <p className="text-xs text-slate-400 mb-2 font-medium">Alert message for community volunteer — edit if needed:</p>
+                                <div className="relative mb-4">
+                                    <textarea
+                                        value={volunteerMessage}
+                                        onChange={e => setVolunteerMessage(e.target.value)}
+                                        className="w-full h-24 p-4 bg-orange-50 border border-orange-200 rounded-xl text-slate-700 resize-none focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-400 text-sm"
+                                    />
+                                    <button
+                                        onClick={() => handleCopy(volunteerMessage, setVolunteerCopied)}
+                                        className="absolute bottom-3 right-3 text-slate-500 hover:text-slate-800 bg-white shadow-sm border border-slate-200 p-2 rounded-lg transition-colors flex items-center gap-1.5 text-xs font-medium"
+                                    >
+                                        {volunteerCopied ? <CheckSquare size={14} className="text-green-500" /> : <Copy size={14} />}
+                                        {volunteerCopied ? 'Copied!' : 'Copy'}
+                                    </button>
+                                </div>
+
+                                <motion.a
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    href={buildWhatsAppLink('91XXXXXXXXXX', volunteerMessage)}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-xl font-semibold text-sm shadow-md transition-all"
                                 >
-                                    {volunteerCopied ? <CheckSquare size={14} className="text-green-500" /> : <Copy size={14} />}
-                                    {volunteerCopied ? 'Copied!' : 'Copy'}
-                                </button>
-                            </div>
-
-                            <motion.a
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                href={buildWhatsAppLink('91XXXXXXXXXX', volunteerMessage)}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-xl font-semibold text-sm shadow-md transition-all"
-                            >
-                                <SendHorizonal size={16} /> Alert Volunteer via WhatsApp
-                            </motion.a>
-                        </Card>
-                    )}
-                </div>
-            </div>
-        </div>
+                                    <SendHorizonal size={16} /> Alert Volunteer via WhatsApp
+                                </motion.a>
+                            </Card>
+                        )
+                    }
+                </div >
+            </div >
+        </div >
     );
 };
 

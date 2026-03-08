@@ -175,13 +175,11 @@ const UploadPage = () => {
 
                                 {(status === 'uploading' || status === 'processing') && (
                                     <div className="flex flex-col items-center text-accent">
-                                        <motion.div
-                                            animate={{ rotate: 360 }}
-                                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                                            className="mb-4"
-                                        >
-                                            <div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full" />
-                                        </motion.div>
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-2.5 h-2.5 rounded-full bg-accent" />
+                                            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className="w-2.5 h-2.5 rounded-full bg-accent" />
+                                            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-2.5 h-2.5 rounded-full bg-accent" />
+                                        </div>
                                         <p className="font-medium animate-pulse">
                                             {status === 'uploading' ? 'Uploading Dataset...' : 'Running AI Models...'}
                                         </p>
@@ -214,9 +212,11 @@ const UploadPage = () => {
                     {/* Demo Button */}
                     {status === 'processing' && !file ? (
                         <div className="flex flex-col items-center text-accent py-2">
-                            <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: 'linear' }} className="mb-3">
-                                <div className="w-7 h-7 border-4 border-accent border-t-transparent rounded-full" />
-                            </motion.div>
+                            <div className="flex items-center gap-2 mb-3">
+                                <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="w-2 h-2 rounded-full bg-accent" />
+                                <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }} className="w-2 h-2 rounded-full bg-accent" />
+                                <motion.div animate={{ y: [0, -6, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }} className="w-2 h-2 rounded-full bg-accent" />
+                            </div>
                             <p className="font-medium text-sm animate-pulse">Loading demo data & running AI models...</p>
                         </div>
                     ) : status === 'success' && !file ? (

@@ -48,10 +48,7 @@ const InterventionTracker = () => {
 
             // Fetch comparison data automatically to display impact
             const outcome = await interventionOutcomeAPI(selectedStudent);
-            setOutcomeData([
-                { name: "Before Interv.", Attendance: outcome.before },
-                { name: "After (30 Days)", Attendance: outcome.after }
-            ]);
+            setOutcomeData(outcome.metrics);
 
             setTimeout(() => setSuccess(false), 3000);
         } catch (err) {
@@ -143,15 +140,16 @@ const InterventionTracker = () => {
                             <h2 className="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-2"><TrendingUp className="text-accent" /> Intervention Outcome</h2>
                             <p className="text-sm text-slate-500 mb-6">Impact of <strong>{interventionType}</strong> on student attendance.</p>
 
-                            <div className="h-64">
+                            <div className="h-64 mt-4">
                                 <ResponsiveContainer width="100%" height="100%">
-                                    <BarChart data={outcomeData} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
+                                    <BarChart data={outcomeData} layout="vertical" margin={{ top: 5, right: 20, left: 30, bottom: 5 }}>
                                         <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#E2E8F0" />
-                                        <XAxis type="number" domain={[0, 100]} />
-                                        <YAxis dataKey="name" type="category" tick={{ fill: '#64748b', fontSize: 12 }} />
-                                        <Tooltip cursor={{ fill: 'transparent' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                                        <Legend />
-                                        <Bar dataKey="Attendance" fill="#4A90E2" radius={[0, 4, 4, 0]} barSize={32} />
+                                        <XAxis type="number" />
+                                        <YAxis dataKey="name" type="category" tick={{ fill: '#64748b', fontSize: 11, fontWeight: 500 }} width={120} axisLine={false} tickLine={false} />
+                                        <Tooltip cursor={{ fill: '#f8fafc' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                                        <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '10px' }} />
+                                        <Bar dataKey="before" name="Before" fill="#94a3b8" radius={[0, 4, 4, 0]} barSize={16} />
+                                        <Bar dataKey="after" name="After (30 Days)" fill="#4A90E2" radius={[0, 4, 4, 0]} barSize={16} />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
