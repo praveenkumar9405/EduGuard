@@ -59,7 +59,7 @@ function AppInner() {
     <div className="min-h-screen bg-secondary flex flex-col font-sans">
       {/* Top Navigation — shown only when logged in (not on public pages) */}
       {user && !isPublicPage && (
-        <nav className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+        <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-sm transition-all duration-300">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-white font-bold text-lg">E</span>
@@ -74,10 +74,10 @@ function AppInner() {
               <button
                 key={path}
                 onClick={() => navigate(path)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300
                   ${isActive(path)
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-slate-500 hover:text-primary hover:bg-slate-50'
+                    ? 'bg-primary/10 text-primary shadow-sm scale-100'
+                    : 'text-slate-500 hover:text-primary hover:bg-slate-50/80 hover:scale-[1.02]'
                   }`}
               >
                 <Icon size={16} />
@@ -88,7 +88,7 @@ function AppInner() {
 
           {/* User pill + logout */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+            <div className="flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-slate-200/80 rounded-full px-3 py-1.5 shadow-sm hover:shadow-md transition-shadow cursor-default">
               <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
                 {user.name.charAt(0)}
               </div>
@@ -110,7 +110,7 @@ function AppInner() {
 
       {/* When user is logged in but on a public page, show minimal nav */}
       {user && isPublicPage && location.pathname !== '/auth' && (
-        <nav className="bg-white border-b border-slate-200 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-sm">
+        <nav className="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-6 py-3 flex items-center justify-between sticky top-0 z-50 shadow-sm">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-white font-bold text-lg">E</span>

@@ -72,57 +72,66 @@ const InterventionTracker = () => {
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
                     <Card>
                         <h2 className="text-lg font-semibold text-slate-800 mb-6 flex items-center gap-2"><ShieldAlert className="text-primary" /> Log New Intervention</h2>
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-slate-600 mb-1">Select Student (At-Risk)</label>
-                                <select
-                                    value={selectedStudent}
-                                    onChange={(e) => setSelectedStudent(e.target.value)}
-                                    className="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                >
-                                    <option value="">-- Choose a student --</option>
-                                    {students.map(s => (
-                                        <option key={s.student_id} value={s.student_id}>{s.name} ({s.student_id}) - {s.risk_level} Risk</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-600 mb-1">Intervention Type</label>
-                                <select
-                                    value={interventionType}
-                                    onChange={(e) => setInterventionType(e.target.value)}
-                                    className="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                >
-                                    <option value="">-- Choose intervention --</option>
-                                    {INTV_TYPES.map(t => (
-                                        <option key={t} value={t}>{t}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-slate-600 mb-1">Date Conducted</label>
-                                <input
-                                    type="date"
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
-                                    className="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                />
-                            </div>
 
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full bg-primary text-white font-medium py-3 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 mt-4"
-                            >
-                                {loading ? "Saving..." : <><Save size={18} /> Save Intervention</>}
-                            </button>
+                        {students.length === 0 ? (
+                            <div className="text-center py-10 bg-slate-50 rounded-xl border border-slate-200">
+                                <ShieldAlert className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                                <h3 className="text-slate-600 font-medium mb-1">No At-Risk Students Found</h3>
+                                <p className="text-sm text-slate-500 px-4">Upload student data or load demo data from the Dashboard to start tracking interventions.</p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-600 mb-1">Select Student (At-Risk)</label>
+                                    <select
+                                        value={selectedStudent}
+                                        onChange={(e) => setSelectedStudent(e.target.value)}
+                                        className="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                    >
+                                        <option value="">-- Choose a student --</option>
+                                        {students.map(s => (
+                                            <option key={s.student_id} value={s.student_id}>{s.name} ({s.student_id}) - {s.risk_level} Risk</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-600 mb-1">Intervention Type</label>
+                                    <select
+                                        value={interventionType}
+                                        onChange={(e) => setInterventionType(e.target.value)}
+                                        className="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                    >
+                                        <option value="">-- Choose intervention --</option>
+                                        {INTV_TYPES.map(t => (
+                                            <option key={t} value={t}>{t}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-600 mb-1">Date Conducted</label>
+                                    <input
+                                        type="date"
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
+                                        className="w-full border border-slate-200 rounded-lg p-2.5 bg-slate-50 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                    />
+                                </div>
 
-                            {success && (
-                                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-green-100 text-green-700 p-3 rounded-lg border border-green-200 flex items-center gap-2 text-sm font-medium mt-4">
-                                    <CheckCircle size={18} /> Successfully logged intervention!
-                                </motion.div>
-                            )}
-                        </form>
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="w-full bg-primary text-white font-medium py-3 rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 mt-4"
+                                >
+                                    {loading ? "Saving..." : <><Save size={18} /> Save Intervention</>}
+                                </button>
+
+                                {success && (
+                                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-green-100 text-green-700 p-3 rounded-lg border border-green-200 flex items-center gap-2 text-sm font-medium mt-4">
+                                        <CheckCircle size={18} /> Successfully logged intervention!
+                                    </motion.div>
+                                )}
+                            </form>
+                        )}
                     </Card>
                 </motion.div>
             </div>

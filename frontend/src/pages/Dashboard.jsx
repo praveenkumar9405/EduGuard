@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { predictRiskAPI } from '../services/api';
+import { predictRiskAPI, loadDemoDataAPI } from '../services/api';
 import Card from '../components/Card';
 import RiskBadge from '../components/RiskBadge';
 import { useAuth } from '../AuthContext';
@@ -14,10 +14,13 @@ import {
 const FILTER_OPTIONS = ['All', 'High', 'Medium', 'Low'];
 
 const SortIcon = ({ field, sortField, sortDir }) => {
-    if (sortField !== field) return <ChevronsUpDown size={14} className="text-slate-300" />;
-    return sortDir === 'asc'
-        ? <ChevronUp size={14} className="text-primary" />
-        : <ChevronDown size={14} className="text-primary" />;
+    const isActive = sortField === field;
+    return (
+        <span className="ml-1 flex flex-col items-center justify-center opacity-70">
+            <ChevronUp size={12} className={`${isActive && sortDir === 'asc' ? 'text-primary opacity-100 scale-125' : 'text-slate-400'} -mb-1 transition-all`} />
+            <ChevronDown size={12} className={`${isActive && sortDir === 'desc' ? 'text-primary opacity-100 scale-125' : 'text-slate-400'} transition-all`} />
+        </span>
+    );
 };
 
 // Build WhatsApp wa.me deep-link
@@ -51,6 +54,22 @@ const Dashboard = () => {
     const [absentIds] = useState(() => new Set()); // populated after load
     const navigate = useNavigate();
     const { user } = useAuth();
+
+    const handleLoadDemo = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            await loadDemoDataAPI();
+            const data = await predictRiskAPI();
+            setStudents(data);
+            const highRisk = data.filter(s => s.risk_level === 'High');
+            highRisk.slice(0, Math.ceil(highRisk.length * 0.4)).forEach(s => absentIds.add(s.student_id));
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         const fetchStudents = async () => {
@@ -120,16 +139,21 @@ const Dashboard = () => {
         );
     }
 
-    if (error) {
+    if (error || students.length === 0) {
         return (
             <div className="max-w-6xl mx-auto px-6 py-12 text-center">
-                <Card className="p-12">
+                <Card className="p-12 border border-slate-200 shadow-sm rounded-2xl">
                     <AlertTriangle className="w-16 h-16 text-slate-400 mx-auto mb-4" />
                     <h2 className="text-2xl font-semibold text-slate-800 mb-2">No Data Available</h2>
                     <p className="text-slate-500 mb-6">Please upload a student dataset or use demo data first.</p>
-                    <button onClick={() => navigate('/upload')} className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium">
-                        Go to Data Ingestion
-                    </button>
+                    <div className="flex items-center justify-center gap-4">
+                        <button onClick={() => navigate('/upload')} className="px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium">
+                            Go to Data Ingestion
+                        </button>
+                        <button onClick={handleLoadDemo} className="px-6 py-2.5 bg-white text-slate-700 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors font-medium">
+                            Try with Demo Data
+                        </button>
+                    </div>
                 </Card>
             </div>
         );
@@ -167,7 +191,7 @@ const Dashboard = () => {
                     { icon: <Megaphone size={22} />, label: 'Absent Today', value: absentCount, color: 'violet' },
                 ].map(({ icon, label, value, color }, i) => (
                     <motion.div key={label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay: i * 0.07 }}>
-                        <Card className="flex items-center gap-4">
+                        <Card className="flex items-center gap-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-slate-200 cursor-pointer">
                             <div className={`p-3 bg-${color}-100 text-${color}-600 rounded-xl`}>{icon}</div>
                             <div>
                                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{label}</p>
@@ -259,7 +283,7 @@ const Dashboard = () => {
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0 }}
                                             transition={{ duration: 0.22, delay: i * 0.025 }}
-                                            className={`border-b border-slate-50 hover:bg-slate-50/60 transition-colors group ${isAbsent ? 'bg-red-50/30' : ''}`}
+                                            className={`border-b border-slate-50 hover:bg-white hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:z-10 relative group ${isAbsent ? 'bg-red-50/30' : ''}`}
                                         >
                                             <td className="px-6 py-4 cursor-pointer" onClick={() => navigate(`/student/${student.student_id}`)}>
                                                 <div className="flex items-center gap-3">
@@ -281,23 +305,23 @@ const Dashboard = () => {
                                             <td className="px-6 py-4 cursor-pointer" onClick={() => navigate(`/student/${student.student_id}`)}>
                                                 <RiskBadge level={student.risk_level} />
                                             </td>
-                                            <td className="px-6 py-4 w-36 cursor-pointer" onClick={() => navigate(`/student/${student.student_id}`)}>
-                                                <div className="flex items-center gap-2">
-                                                    <span className={`text-sm font-bold tabular-nums
+                                            <td className="px-6 py-4 cursor-pointer" onClick={() => navigate(`/student/${student.student_id}`)}>
+                                                <div className="flex items-center gap-3 w-40">
+                                                    <span className={`text-sm font-bold tabular-nums w-10 text-right shrink-0
                             ${student.risk_level === 'High' ? 'text-red-600' :
                                                             student.risk_level === 'Medium' ? 'text-orange-500' : 'text-green-600'}`}>
                                                         {student.risk_score}%
                                                     </span>
-                                                </div>
-                                                <div className="w-full bg-slate-100 rounded-full h-1.5 mt-1.5 overflow-hidden">
-                                                    <motion.div
-                                                        initial={{ width: 0 }}
-                                                        animate={{ width: `${student.risk_score}%` }}
-                                                        transition={{ duration: 0.8, delay: i * 0.02 }}
-                                                        className={`h-1.5 rounded-full
-                              ${student.risk_level === 'High' ? 'bg-red-500' :
-                                                                student.risk_level === 'Medium' ? 'bg-orange-400' : 'bg-green-500'}`}
-                                                    />
+                                                    <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden flex-1 shadow-inner">
+                                                        <motion.div
+                                                            initial={{ width: 0 }}
+                                                            animate={{ width: `${student.risk_score}%` }}
+                                                            transition={{ duration: 1, delay: i * 0.03, ease: 'easeOut' }}
+                                                            className={`h-full rounded-full
+                                ${student.risk_level === 'High' ? 'bg-red-500' :
+                                                                    student.risk_level === 'Medium' ? 'bg-orange-400' : 'bg-green-500'}`}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </td>
                                             {/* Attendance indicator */}
